@@ -11,17 +11,35 @@
           size="lg"
           v-model="selected"
           v-on:change="handleResult(index, presentData.answer)"
-        >{{ option }}</b-form-radio>
+          >{{ option }}</b-form-radio
+        >
+        <b-container>
+          <b-row>
+            <b-col
+              ><radial-progress-bar
+                :diameter="230"
+                :completed-steps="index"
+                :total-steps="10"
+                :animateSpeed="1000"
+              >
+                <h4 class="status">Attempted: {{ index }}</h4>
+                <h4 class="status">Remaining: {{ 10 - index }}</h4>
+              </radial-progress-bar></b-col
+            >
+            <b-col
+              ><radial-progress-bar
+                :diameter="230"
+                :completed-steps="score"
+                :total-steps="100"
+                :animateSpeed="1000"
+              >
+                <h4 class="status">Score: {{ score }}</h4>
+                <h4 class="status">Highest: 100</h4>
+              </radial-progress-bar></b-col
+            >
+          </b-row>
+        </b-container>
       </b-form-group>
-      <radial-progress-bar
-        :diameter="250"
-        :completed-steps="index"
-        :total-steps="10"
-        :animateSpeed="1000"
-      >
-        <h4 class="status">{{ index }} Attempted</h4>
-        <h4 class="status">{{ 10 - index }} Remaining</h4>
-      </radial-progress-bar>
     </div>
     <div class="result" v-show="showResult">
       <h1>{{ resultMessage }}</h1>
@@ -38,7 +56,7 @@ import handleResultMessage from "../mixins/handleResultMessageMixin";
 export default {
   name: "QuestionField",
   components: {
-    RadialProgressBar
+    RadialProgressBar,
   },
   mixins: [clearSelection, handleResultMessage],
   data() {
@@ -50,7 +68,7 @@ export default {
       presentData: {},
       score: 0,
       showResult: false,
-      resultMessage: ""
+      resultMessage: "",
     };
   },
   created() {
@@ -64,7 +82,7 @@ export default {
     },
     handleResult(value, answer) {
       if (value == answer) {
-        this.score += 1;
+        this.score += 10;
       }
       this.index += 1;
       if (this.index === 10) {
@@ -80,8 +98,8 @@ export default {
       this.score = 0;
       this.showResult = false;
       this.presentQuestion();
-    }
-  }
+    },
+  },
 };
 </script>
 
