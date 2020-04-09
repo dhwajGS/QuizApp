@@ -8,7 +8,7 @@ const questions = [
       " Tom Marvin Riddle",
       " Tom Ravolo Riddle",
     ],
-    answer: "A",
+    answer: "0",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const questions = [
       " Cornelius Fudge",
       " Barty Crouch, Jr.",
     ],
-    answer: "D",
+    answer: "3",
   },
   {
     id: 3,
@@ -30,13 +30,13 @@ const questions = [
       " In a car crash",
       " In a bus crash",
     ],
-    answer: "C",
+    answer: "2",
   },
   {
     id: 4,
     question: "What is the symbol for the Ravenclaw house?",
     options: [" Raven", " Crow", " Hawk", " Eagle"],
-    answer: "D",
+    answer: "3",
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const questions = [
       " Godric Gryffindor",
       " Sirius Black",
     ],
-    answer: "B",
+    answer: "1",
   },
   {
     id: 6,
@@ -58,13 +58,13 @@ const questions = [
       " Avada Kedavra, Crucio and Imperio",
       " Impedimenta,Expelliarmus,Crucio",
     ],
-    answer: "C",
+    answer: "2",
   },
   {
     id: 7,
     question: "What Is The Last Spell The Elder Wand Ever Casts?",
     options: [" Avada Kedavra", " Expelliarmus", " Crucio", " Reparo"],
-    answer: "D",
+    answer: "3",
   },
   {
     id: 8,
@@ -75,24 +75,24 @@ const questions = [
       " Severus Snape",
       " Draco Malfoy",
     ],
-    answer: "C",
+    answer: "2",
   },
   {
     id: 9,
     question: "What is the symbol for the Gryffindor house?",
     options: [" Lion", " Snake", " Eagle", " Hawk"],
-    answer: "A",
+    answer: "0",
   },
   {
     id: 10,
-    question: "Who founded the Order of the Phoenix?",
+    question: "Who destroyed the last remaining horcrux?",
     options: [
-      " Remus Lupin",
-      " Albus Dumbledore",
-      " Godric Gryffindor",
-      " Sirius Black",
+      " Harry Potter",
+      " Neville LongBottom",
+      " Lord Voldemort",
+      " Ron Weasley",
     ],
-    answer: "B",
+    answer: "1",
   },
 ];
 
