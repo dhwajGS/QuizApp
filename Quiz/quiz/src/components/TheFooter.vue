@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 div {
-  position: absolute;
+  
   margin-bottom: 0px;
   width: 100%;
   text-align: center;
