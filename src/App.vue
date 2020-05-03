@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <TheHeader />
-    <QuestionField />
-    <TheFooter />
+    <Header />
+    <Questions />
+    <Footer />
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue";
-import TheFooter from "./components/TheFooter.vue";
-import QuestionField from "./containers/QuestionField";
+import Header from "./components/header.vue";
+import Footer from "./components/footer.vue";
+import Questions from "./containers/questions";
 export default {
   name: "App",
   components: {
-    TheHeader,
-    QuestionField,
-    TheFooter
+    Header,
+    Questions,
+    Footer
   }
 };
 </script>

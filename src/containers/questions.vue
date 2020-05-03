@@ -10,40 +10,39 @@
           stacked
           size="lg"
           v-model="selected"
-          v-on:change="handleResult(index, presentData.answer)"
-          >{{ option }}</b-form-radio
+          v-on:change="handleChoice(index, presentData.answer)"
+        >{{ option }}</b-form-radio>
+        <b-button
+          class="alignRight"
+          variant="outline-success"
+          v-on:click="handleNext"
+        >{{nextButton}}</b-button>
+        <radial-progress-bar
+          :diameter="200"
+          :completed-steps="index"
+          :total-steps="10"
+          :animateSpeed="1000"
         >
-        <b-container>
-          <b-row>
-            <b-col
-              ><radial-progress-bar
-                :diameter="230"
-                :completed-steps="index"
-                :total-steps="10"
-                :animateSpeed="1000"
-              >
-                <h4 class="status">Attempted: {{ index }}</h4>
-                <h4 class="status">Remaining: {{ 10 - index }}</h4>
-              </radial-progress-bar></b-col
-            >
-            <b-col
-              ><radial-progress-bar
-                :diameter="230"
-                :completed-steps="score"
-                :total-steps="100"
-                :animateSpeed="1000"
-              >
-                <h4 class="status">Score: {{ score }}</h4>
-                <h4 class="status">Highest: 100</h4>
-              </radial-progress-bar></b-col
-            >
-          </b-row>
-        </b-container>
+          <br />
+          <h4 class="status">Attempted: {{ index }}</h4>
+          <h4 class="status">Remaining: {{ 10 - index }}</h4>
+        </radial-progress-bar>
       </b-form-group>
     </div>
     <div class="result" v-show="showResult">
       <h1>{{ resultMessage }}</h1>
-      <b-button variant="light" v-on:click="reset">Play Again</b-button>
+      <radial-progress-bar
+        :diameter="230"
+        :completed-steps="score"
+        :total-steps="100"
+        :animateSpeed="1000"
+      >
+        <br />
+        <h4 class="status">Score: {{ score }}</h4>
+        <h4 class="status">Highest: 100</h4>
+      </radial-progress-bar>
+
+      <b-button class="alignRight" variant="outline-success" v-on:click="reset">Play Again</b-button>
     </div>
   </div>
 </template>
@@ -56,19 +55,20 @@ import handleResultMessage from "../mixins/handleResultMessageMixin";
 export default {
   name: "QuestionField",
   components: {
-    RadialProgressBar,
+    RadialProgressBar
   },
   mixins: [clearSelection, handleResultMessage],
   data() {
-    console.log("Hello");
     return {
       questions,
-      selected: false,
+      selected: null,
+      answer: "",
       index: 0,
       presentData: {},
       score: 0,
       showResult: false,
       resultMessage: "",
+      nextButton: "Next"
     };
   },
   created() {
@@ -77,11 +77,14 @@ export default {
   },
   methods: {
     presentQuestion() {
-      //
       this.presentData = this.questions[this.index];
     },
-    handleResult(value, answer) {
-      if (value == answer) {
+    handleChoice(value, answer) {
+      this.answer = answer;
+      this.selected = value;
+    },
+    handleNext() {
+      if (this.answer == this.selected) {
         this.score += 10;
       }
       this.index += 1;
@@ -90,7 +93,8 @@ export default {
         this.resultMessage = this.handleResultMessage(this.score);
       } else this.presentQuestion();
       this.clearSelection();
-      this.selected = false;
+      this.selected = null;
+      if (this.index === 9) this.nextButton = "End";
     },
     reset() {
       console.log("this.index", this.index);
@@ -98,8 +102,8 @@ export default {
       this.score = 0;
       this.showResult = false;
       this.presentQuestion();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -125,5 +129,9 @@ div {
 .status {
   color: #bbff42;
   text-align: start;
+}
+.alignRight {
+  position: relative;
+  margin-left: 40%;
 }
 </style>

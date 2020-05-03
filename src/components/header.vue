@@ -18,7 +18,7 @@ div {
   font-family: fantasy;
   padding-top: 10px;
   background-color: rgb(44, 15, 15);
-  background-image: url("BackgroundHeader.jpg");
+  background-image: url("../assets/logo.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   color: white;
