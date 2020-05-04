@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: fantasy;
   -webkit-font-smoothing: antialiased;

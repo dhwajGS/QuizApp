@@ -1,49 +1,62 @@
 <template>
-  <div class="container" v-if="Object.keys(presentData).length">
-    <div v-show="!showResult">
-      <b-form-group>
-        Q.{{ presentData.id }} {{ presentData.question }}
-        <b-form-radio
-          v-for="(option, index) in presentData.options"
-          :key="index"
-          name="radio"
-          stacked
-          size="lg"
-          v-model="selected"
-          v-on:change="handleChoice(index, presentData.answer)"
-        >{{ option }}</b-form-radio>
-        <b-button
-          class="alignRight"
-          variant="outline-success"
-          v-on:click="handleNext"
-        >{{nextButton}}</b-button>
-        <radial-progress-bar
-          :diameter="200"
-          :completed-steps="index"
-          :total-steps="10"
-          :animateSpeed="1000"
-        >
-          <br />
-          <h4 class="status">Attempted: {{ index }}</h4>
-          <h4 class="status">Remaining: {{ 10 - index }}</h4>
-        </radial-progress-bar>
-      </b-form-group>
-    </div>
-    <div class="result" v-show="showResult">
-      <h1>{{ resultMessage }}</h1>
-      <radial-progress-bar
-        :diameter="230"
-        :completed-steps="score"
-        :total-steps="100"
-        :animateSpeed="1000"
-      >
-        <br />
-        <h4 class="status">Score: {{ score }}</h4>
-        <h4 class="status">Highest: 100</h4>
-      </radial-progress-bar>
+  <div>
+    <b-row>
+      <b-col>
+        <div class="container question col-md-auto" v-if="Object.keys(presentData).length">
+          <div v-show="!showResult">
+            <b-form-group>
+              Q.{{ presentData.id }} {{ presentData.question }}
+              <br />
+              <b-form-radio
+                v-for="(option, index) in presentData.options"
+                :key="index"
+                name="radio"
+                stacked
+                size="lg"
+                v-model="selected"
+                v-on:change="handleChoice(index, presentData.answer)"
+              >{{ option }}</b-form-radio>
+              <br />
+              <b-button
+                size="lg"
+                :disabled="selected === null"
+                class="mbtn"
+                v-on:click="handleNext"
+              >{{nextButton}}</b-button>
+            </b-form-group>
+          </div>
+          <div class="result" v-show="showResult">
+            <h1>{{ resultMessage }}</h1>
+            <radial-progress-bar
+              class="alignRight"
+              :diameter="230"
+              :completed-steps="score"
+              :total-steps="100"
+              :animateSpeed="1000"
+            >
+              <h4 class="status">Score: {{ score }}</h4>
+              <h4 class="status">Highest: 100</h4>
+            </radial-progress-bar>&nbsp;&nbsp;
+            <b-button class="alignRight" size="lg" variant="secondary" v-on:click="reset">Play Again</b-button>
+          </div>
+        </div>
+      </b-col>
 
-      <b-button class="alignRight" variant="outline-success" v-on:click="reset">Play Again</b-button>
-    </div>
+      <b-col v-show="!showResult">
+        <div class="float-right progressbar">
+          <radial-progress-bar
+            :diameter="200"
+            :completed-steps="index"
+            :total-steps="10"
+            :animateSpeed="1000"
+          >
+            <br />
+            <h4 class="status">Attempted: {{ index }}</h4>
+            <h4 class="status">Remaining: {{ 10 - index }}</h4>
+          </radial-progress-bar>
+        </div>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -97,10 +110,11 @@ export default {
       if (this.index === 9) this.nextButton = "End";
     },
     reset() {
-      console.log("this.index", this.index);
       this.index = 0;
       this.score = 0;
       this.showResult = false;
+      this.nextButton = "Next";
+      this.selected = null;
       this.presentQuestion();
     }
   }
@@ -108,11 +122,14 @@ export default {
 </script>
 
 <style scoped>
-div {
+.question {
+  grid-auto-columns: 75%;
   text-size-adjust: inherit;
   font-size: xx-large;
   font-family: fantasy;
   padding-top: 40px;
+  padding-left: 25px;
+  margin-top: 50px;
   text-align: left;
   color: white;
   border: none;
@@ -132,6 +149,10 @@ div {
 }
 .alignRight {
   position: relative;
-  margin-left: 40%;
+  margin-left: 48px;
+}
+.progressbar {
+  margin-right: 200px;
+  margin-top: 10px;
 }
 </style>
