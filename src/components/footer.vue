@@ -15,7 +15,7 @@ div {
   margin-bottom: 0px;
   width: 100%;
   text-align: center;
-  background-color: rgb(44, 15, 15);
+  background-color: rgb(7, 7, 7);
   font-family: fantasy;
   color: white;
   border: none;

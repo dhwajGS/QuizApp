@@ -3,11 +3,11 @@ export default {
     handleResultMessage: (score) => {
       let resultMessage = "";
       if (score >= 70) {
-        resultMessage = "Congrats Potter Head !!!";
+        resultMessage = `Congrats Potter Head !!! Your score is ${score}`;
       } else if (score >= 40) {
-        resultMessage = "You can do better !!!";
+        resultMessage = ` Your score is ${score}. You can do better !!!`;
       } else {
-        resultMessage = "Try watching Potter series !!!";
+        resultMessage = `Your score is ${score}. You can try watching Potter series !!!`;
       }
       return resultMessage;
     },

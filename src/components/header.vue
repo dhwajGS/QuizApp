@@ -13,16 +13,11 @@ export default {
 
 <style scoped>
 div {
-  width: 100%;
-  text-align: center;
-  font-family: fantasy;
-  padding-top: 10px;
-  background-color: rgb(44, 15, 15);
+  background-color: #122b3e;
   background-image: url("../assets/logo.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   color: white;
-
   border: none;
 }
 </style>
